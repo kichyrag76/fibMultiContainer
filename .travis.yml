@@ -1,0 +1,22 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+  - docker build -t kichyrag76/fibMultiContainer-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kichyrag76/fibMultiContainer-test npm test -- --coverage
+
+after_success:
+  - docker build -t kichyrag76/fibMultiContainer-client ./client
+  - docker build -t kichyrag76/fibMultiContainer-nginx ./ngnix
+  - docker build -t kichyrag76/fibMultiContainer-server ./server 
+  - docker build -t kichyrag76/fibMultiContainer-worker ./worker
+  # login to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take to those images and push them to docker hub
+  - docker push kichyrag76/fibMultiContainer-client
+  - docker push kichyrag76/fibMultiContainer-nginx
+  - docker push kichyrag76/fibMultiContainer-server
+  - docker push kichyrag76/fibMultiContainer-worker
