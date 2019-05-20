@@ -3,20 +3,20 @@ services:
     - docker
 
 before_install:
-  - docker build -t kichyrag76/fibMultiContainer-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kichyrag76/fibmulti-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run kichyrag76/fibMultiContainer-test npm test -- --coverage
+  - docker run kichyrag76/fibmulti-test npm test -- --coverage
 
 after_success:
-  - docker build -t kichyrag76/fibMultiContainer-client ./client
-  - docker build -t kichyrag76/fibMultiContainer-nginx ./ngnix
-  - docker build -t kichyrag76/fibMultiContainer-server ./server 
-  - docker build -t kichyrag76/fibMultiContainer-worker ./worker
+  - docker build -t kichyrag76/fibmulti-client ./client
+  - docker build -t kichyrag76/fibmulti-nginx ./ngnix
+  - docker build -t kichyrag76/fibmulti-server ./server 
+  - docker build -t kichyrag76/fibmulti-worker ./worker
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take to those images and push them to docker hub
-  - docker push kichyrag76/fibMultiContainer-client
-  - docker push kichyrag76/fibMultiContainer-nginx
-  - docker push kichyrag76/fibMultiContainer-server
-  - docker push kichyrag76/fibMultiContainer-worker
+  - docker push kichyrag76/fibmulti-client
+  - docker push kichyrag76/fibmulti-nginx
+  - docker push kichyrag76/fibmulti-server
+  - docker push kichyrag76/fibmulti-worker
