@@ -2,9 +2,9 @@ FROM node:10.15.3 as builder
 WORKDIR '/app'
 COPY ./package*.json ./
 RUN npm install
-
 COPY . .
-RUN npm build
+RUN npm run build
+
 FROM nginx
 EXPOSE 3000
 COPY ./default.conf /etc/nginx/conf.d/defult.conf
