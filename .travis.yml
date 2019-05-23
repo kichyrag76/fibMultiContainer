@@ -20,3 +20,17 @@ after_success:
   - docker push kichyrag76/fibmulti-nginx
   - docker push kichyrag76/fibmulti-server
   - docker push kichyrag76/fibmulti-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app:  fibMultiContainer
+  env:  Fibmulticontainer-env
+  bucket_name:  elasticbeanstalk-us-east-2-897163456416
+  bucket_path:  fibmulti-container
+  on:
+    branch: master
+  access_key_id:  "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
