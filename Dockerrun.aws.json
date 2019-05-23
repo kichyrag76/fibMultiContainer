@@ -1,43 +1,40 @@
 {
-    "AWSEBDockerrunVersion" : 2,
-    "ContainerDefinitions"  : [
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "kichyrag76/fibmulti-client",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "server",
+      "image": "kichyrag76/fibmulti-server",
+      "hostname": "api",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "worker",
+      "image": "kichyrag76/fibmulti-worker",
+      "hostname": "worker",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "kichyrag76/fibmulti-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
         {
-            "name"  :   "fibMulti-client",
-            "image" :   "kichyrag76/fibmulti-client",
-            "hostname"  :   "client",
-            "essential" :   false,
-            "memory"    :   128
-
-        },
-        {
-            "name"  :   "fibMulti-server",
-            "image" :   "kichyrag76/fibmulti-server",
-            "hostname"  :   "api",
-            "essential" :   false,
-            "memory"    :   128
-
-        },
-        {
-            "name"  :   "fibMulti-worker",
-            "image" :   "kichyrag76/fibmulti-worker",
-            "hostname"  :   "worker",
-            "essential" :   false,
-            "memory"    :   128
-
-        },
-        {
-            "name"  :   "fibmulti-nginx",
-            "image" :   "kichyrag76/fibmulti-nginx",
-            "hostname"  :   "nginx",
-            "essential" :   true,
-            "portMappings"  :   [
-                {
-                    "hostPort"  :   80,
-                    "containerPort" :   80
-                }
-            ],
-            "links": ["fibMulti-client", "fibMulti-server"],
-            "memory"    :   128
+          "hostPort": 80,
+          "containerPort": 80
         }
-    ]
+      ],
+      "links": ["client", "server"],
+      "memory": 128
+    }
+  ]
 }
