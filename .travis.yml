@@ -22,7 +22,7 @@ after_success:
   - docker push kichyrag76/fibmulti-worker
 
 deploy:
-  provider: "elasticbeanstalk"
+  provider: elasticbeanstalk
   region: "us-east-2"
   app:  "fibMultiContainer"
   env:  "Fibmulticontainer-env"
