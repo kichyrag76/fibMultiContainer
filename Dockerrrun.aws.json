@@ -2,7 +2,7 @@
     "AWSEBDockerrunVersion" : 2,
     "containerDefinitions"  : [
         {
-            "name"  :   "fibMulti-client",
+            "name"  :   "client",
             "image" :   "kichyrag76/fibmulti-client",
             "hostname"  :   "client",
             "essential" :   false,
@@ -10,7 +10,7 @@
 
         },
         {
-            "name"  :   "fibMulti-server",
+            "name"  :   "server",
             "image" :   "kichyrag76/fibmulti-server",
             "hostname"  :   "api",
             "essential" :   false,
@@ -18,7 +18,7 @@
 
         },
         {
-            "name"  :   "fibMulti-worker",
+            "name"  :   "worker",
             "image" :   "kichyrag76/fibmulti-worker",
             "hostname"  :   "worker",
             "essential" :   false,
@@ -26,7 +26,7 @@
 
         },
         {
-            "name"  :   "fibmulti-nginx",
+            "name"  :   "nginx",
             "image" :   "kichyrag76/fibmulti-nginx",
             "hostname"  :   "nginx",
             "essential" :   true,
@@ -36,7 +36,7 @@
                     "containerPort" :   80
                 }
             ],
-            "links": ["fibMulti-client", "fibMulti-server"],
+            "links": ["client", "server"],
             "memory"    :   128
         }
     ]
